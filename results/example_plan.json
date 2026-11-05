@@ -1,0 +1,74 @@
+{
+ "query": {
+  "start": 52,
+  "end": 11,
+  "n": 5,
+  "budget": 300,
+  "must": 7,
+  "T0": 800
+ },
+ "plan": {
+  "status": "ok",
+  "stops": [
+   {
+    "place": 52,
+    "poi_id": 71,
+    "category": "Parks and spaces",
+    "arrive": "13:20",
+    "stay_min": 35,
+    "leave": "13:55",
+    "travel_from_prev_min": 0
+   },
+   {
+    "place": 42,
+    "poi_id": 50,
+    "category": "Structures",
+    "arrive": "14:00",
+    "stay_min": 45,
+    "leave": "14:45",
+    "travel_from_prev_min": 5
+   },
+   {
+    "place": 51,
+    "poi_id": 70,
+    "category": "Parks and spaces",
+    "arrive": "14:50",
+    "stay_min": 35,
+    "leave": "15:25",
+    "travel_from_prev_min": 5
+   },
+   {
+    "place": 28,
+    "poi_id": 35,
+    "category": "Institutions",
+    "arrive": "15:30",
+    "stay_min": 30,
+    "leave": "16:00",
+    "travel_from_prev_min": 5
+   },
+   {
+    "place": 11,
+    "poi_id": 15,
+    "category": "Shopping",
+    "arrive": "16:05",
+    "stay_min": 50,
+    "leave": "16:55",
+    "travel_from_prev_min": 5
+   }
+  ],
+  "cost": 12.327234919897535,
+  "total_time": 215,
+  "min_budget": null,
+  "warning": "",
+  "patterns_valid": 114,
+  "patterns_tried": 10,
+  "expansions": 59,
+  "pattern": [
+   "Parks and spaces",
+   "Structures",
+   "Parks and spaces",
+   "Institutions",
+   "Shopping"
+  ]
+ }
+}

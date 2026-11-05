@@ -1,0 +1,934 @@
+{
+ "config": {
+  "data_dir": "tour-cikm16/data",
+  "city": "Melb",
+  "min_visits": 20,
+  "max_pool": 60,
+  "tz_offset_h": 10,
+  "min_dur_s": 300,
+  "max_dur_s": 28800,
+  "detour": 1.3,
+  "walk_kmh": 4.5,
+  "transit_kmh": 20.0,
+  "transit_wait_min": 10.0,
+  "tick": 5,
+  "k_folds": 5,
+  "val_frac": 0.15,
+  "seed": 0,
+  "lam": 0.05,
+  "max_expansions": 200000,
+  "emb": 8,
+  "hidden": 32,
+  "dropout": 0.5,
+  "lr": 0.003,
+  "weight_decay": 0.001,
+  "max_epochs": 300,
+  "patience": 30,
+  "hour_harm": 1,
+  "batch": 128
+ },
+ "n_places": 60,
+ "categories": [
+  "City precincts",
+  "Entertainment",
+  "Institutions",
+  "Parks and spaces",
+  "Public galleries",
+  "Shopping",
+  "Sports stadiums",
+  "Structures",
+  "Transport"
+ ],
+ "next_place": [
+  {
+   "model": "uniform",
+   "nll": 4.0775,
+   "nll_sd_over_folds": 0.0,
+   "top1": 0.0169,
+   "top3": 0.0508,
+   "n_test": 815
+  },
+  {
+   "model": "pop",
+   "nll": 3.8674,
+   "nll_sd_over_folds": 0.0044,
+   "top1": 0.0601,
+   "top3": 0.1362,
+   "n_test": 815
+  },
+  {
+   "model": "markov",
+   "nll": 3.595,
+   "nll_sd_over_folds": 0.0028,
+   "top1": 0.1387,
+   "top3": 0.2982,
+   "n_test": 815
+  },
+  {
+   "model": "nn_nohour",
+   "nll": 3.5489,
+   "nll_sd_over_folds": 0.0404,
+   "top1": 0.1215,
+   "top3": 0.2847,
+   "n_test": 815
+  },
+  {
+   "model": "nn",
+   "nll": 3.6536,
+   "nll_sd_over_folds": 0.0537,
+   "top1": 0.0957,
+   "top3": 0.2282,
+   "n_test": 815
+  }
+ ],
+ "nll_diffs": {
+  "nn - markov": [
+   0.0147,
+   -0.0037,
+   0.0322
+  ],
+  "nn - nn_nohour": [
+   0.0262,
+   0.0163,
+   0.0354
+  ],
+  "nn - pop": [
+   -0.0535,
+   -0.0772,
+   -0.0302
+  ],
+  "markov - pop": [
+   -0.0681,
+   -0.0942,
+   -0.0437
+  ]
+ },
+ "duration": [
+  {
+   "model": "global mean",
+   "mae_log": 1.1413,
+   "rmse_log": 1.3195,
+   "median_abs_err_min": 36.7773,
+   "n_test": 555
+  },
+  {
+   "model": "per-place mean",
+   "mae_log": 1.1064,
+   "rmse_log": 1.2947,
+   "median_abs_err_min": 35.137,
+   "n_test": 555
+  },
+  {
+   "model": "NN duration head",
+   "mae_log": 1.1029,
+   "rmse_log": 1.3102,
+   "median_abs_err_min": 36.4266,
+   "n_test": 555
+  }
+ ],
+ "bruteforce": {
+  "runs": 60,
+  "feasible": 48,
+  "ucs_match": 60,
+  "astar_match": 60,
+  "greedy_optimal": 14
+ },
+ "lambda": {
+  "nn": 0.0,
+  "nn_nohour": 0.0,
+  "markov": 0.25,
+  "pop": 0.25
+ },
+ "exp3": [
+  {
+   "cost model": "random",
+   "queries": 91,
+   "f1_all mean": 0.4495,
+   "f1_int mean": 0.0771,
+   "pairs_f1 mean": 0.1529,
+   "f1_all lo": 0.4264,
+   "f1_int lo": 0.0515,
+   "pairs_f1 lo": 0.1343,
+   "f1_all hi": 0.4732,
+   "f1_int hi": 0.1056,
+   "pairs_f1 hi": 0.1714,
+   "ok%": 100.0,
+   "over_budget%": 0.0,
+   "infeasible%": 0.0
+  },
+  {
+   "cost model": "pop",
+   "queries": 91,
+   "f1_all mean": 0.5553,
+   "f1_int mean": 0.2505,
+   "pairs_f1 mean": 0.2674,
+   "f1_all lo": 0.5235,
+   "f1_int lo": 0.1943,
+   "pairs_f1 lo": 0.2328,
+   "f1_all hi": 0.5908,
+   "f1_int hi": 0.3087,
+   "pairs_f1 hi": 0.3075,
+   "ok%": 97.8022,
+   "over_budget%": 2.1978,
+   "infeasible%": 0.0
+  },
+  {
+   "cost model": "markov",
+   "queries": 91,
+   "f1_all mean": 0.5525,
+   "f1_int mean": 0.246,
+   "pairs_f1 mean": 0.2657,
+   "f1_all lo": 0.5186,
+   "f1_int lo": 0.1932,
+   "pairs_f1 lo": 0.2293,
+   "f1_all hi": 0.5875,
+   "f1_int hi": 0.305,
+   "pairs_f1 hi": 0.303,
+   "ok%": 97.8022,
+   "over_budget%": 2.1978,
+   "infeasible%": 0.0
+  },
+  {
+   "cost model": "nn_nohour",
+   "queries": 91,
+   "f1_all mean": 0.5685,
+   "f1_int mean": 0.2804,
+   "pairs_f1 mean": 0.2879,
+   "f1_all lo": 0.5349,
+   "f1_int lo": 0.2292,
+   "pairs_f1 lo": 0.2495,
+   "f1_all hi": 0.6079,
+   "f1_int hi": 0.339,
+   "pairs_f1 hi": 0.3308,
+   "ok%": 97.8022,
+   "over_budget%": 2.1978,
+   "infeasible%": 0.0
+  },
+  {
+   "cost model": "nn",
+   "queries": 91,
+   "f1_all mean": 0.537,
+   "f1_int mean": 0.2198,
+   "pairs_f1 mean": 0.2484,
+   "f1_all lo": 0.5062,
+   "f1_int lo": 0.1695,
+   "pairs_f1 lo": 0.2161,
+   "f1_all hi": 0.5701,
+   "f1_int hi": 0.2757,
+   "pairs_f1 hi": 0.2873,
+   "ok%": 97.8022,
+   "over_budget%": 2.1978,
+   "infeasible%": 0.0
+  }
+ ],
+ "exp3_paired": [
+  {
+   "metric": "f1_int",
+   "comparison": "nn - markov",
+   "diff": -0.0262,
+   "lo": -0.0665,
+   "hi": 0.013
+  },
+  {
+   "metric": "f1_int",
+   "comparison": "nn - pop",
+   "diff": -0.0308,
+   "lo": -0.0697,
+   "hi": 0.0051
+  },
+  {
+   "metric": "f1_int",
+   "comparison": "nn - nn_nohour",
+   "diff": -0.0606,
+   "lo": -0.1016,
+   "hi": -0.0275
+  },
+  {
+   "metric": "f1_int",
+   "comparison": "nn - random",
+   "diff": 0.1427,
+   "lo": 0.0909,
+   "hi": 0.1985
+  },
+  {
+   "metric": "f1_int",
+   "comparison": "markov - pop",
+   "diff": -0.0046,
+   "lo": -0.0549,
+   "hi": 0.0417
+  },
+  {
+   "metric": "pairs_f1",
+   "comparison": "nn - markov",
+   "diff": -0.0173,
+   "lo": -0.0445,
+   "hi": 0.0102
+  },
+  {
+   "metric": "pairs_f1",
+   "comparison": "nn - pop",
+   "diff": -0.019,
+   "lo": -0.0483,
+   "hi": 0.0079
+  },
+  {
+   "metric": "pairs_f1",
+   "comparison": "nn - nn_nohour",
+   "diff": -0.0396,
+   "lo": -0.0681,
+   "hi": -0.0174
+  },
+  {
+   "metric": "pairs_f1",
+   "comparison": "nn - random",
+   "diff": 0.0955,
+   "lo": 0.0616,
+   "hi": 0.1327
+  },
+  {
+   "metric": "pairs_f1",
+   "comparison": "markov - pop",
+   "diff": -0.0017,
+   "lo": -0.0374,
+   "hi": 0.0307
+  }
+ ],
+ "exp1": [
+  {
+   "n": 4,
+   "algo": "astar",
+   "queries": 4,
+   "solved": 1.0,
+   "capped": 0.0,
+   "exp_mean": 3.0,
+   "exp_median": 3.0,
+   "ms_median": 0.015,
+   "gap_pct": 0.0
+  },
+  {
+   "n": 4,
+   "algo": "greedy",
+   "queries": 4,
+   "solved": 1.0,
+   "capped": 0.0,
+   "exp_mean": 3.0,
+   "exp_median": 3.0,
+   "ms_median": 0.011,
+   "gap_pct": 2.328
+  },
+  {
+   "n": 4,
+   "algo": "ucs",
+   "queries": 4,
+   "solved": 1.0,
+   "capped": 0.0,
+   "exp_mean": 38.0,
+   "exp_median": 34.5,
+   "ms_median": 0.076,
+   "gap_pct": 0.0
+  },
+  {
+   "n": 5,
+   "algo": "astar",
+   "queries": 4,
+   "solved": 1.0,
+   "capped": 0.0,
+   "exp_mean": 5.75,
+   "exp_median": 5.5,
+   "ms_median": 0.035,
+   "gap_pct": 0.0
+  },
+  {
+   "n": 5,
+   "algo": "greedy",
+   "queries": 4,
+   "solved": 1.0,
+   "capped": 0.0,
+   "exp_mean": 4.0,
+   "exp_median": 4.0,
+   "ms_median": 0.017,
+   "gap_pct": 15.848
+  },
+  {
+   "n": 5,
+   "algo": "ucs",
+   "queries": 4,
+   "solved": 1.0,
+   "capped": 0.0,
+   "exp_mean": 270.75,
+   "exp_median": 226.0,
+   "ms_median": 1.03,
+   "gap_pct": 0.0
+  },
+  {
+   "n": 6,
+   "algo": "astar",
+   "queries": 4,
+   "solved": 1.0,
+   "capped": 0.0,
+   "exp_mean": 18.75,
+   "exp_median": 18.0,
+   "ms_median": 0.115,
+   "gap_pct": 0.0
+  },
+  {
+   "n": 6,
+   "algo": "greedy",
+   "queries": 4,
+   "solved": 1.0,
+   "capped": 0.0,
+   "exp_mean": 5.0,
+   "exp_median": 5.0,
+   "ms_median": 0.021,
+   "gap_pct": 5.256
+  },
+  {
+   "n": 6,
+   "algo": "ucs",
+   "queries": 4,
+   "solved": 1.0,
+   "capped": 0.0,
+   "exp_mean": 888.0,
+   "exp_median": 420.0,
+   "ms_median": 2.558,
+   "gap_pct": 0.0
+  },
+  {
+   "n": 7,
+   "algo": "astar",
+   "queries": 4,
+   "solved": 1.0,
+   "capped": 0.0,
+   "exp_mean": 21.75,
+   "exp_median": 19.5,
+   "ms_median": 0.104,
+   "gap_pct": 0.0
+  },
+  {
+   "n": 7,
+   "algo": "greedy",
+   "queries": 4,
+   "solved": 1.0,
+   "capped": 0.0,
+   "exp_mean": 6.0,
+   "exp_median": 6.0,
+   "ms_median": 0.026,
+   "gap_pct": 17.667
+  },
+  {
+   "n": 7,
+   "algo": "ucs",
+   "queries": 4,
+   "solved": 1.0,
+   "capped": 0.0,
+   "exp_mean": 3868.75,
+   "exp_median": 2032.5,
+   "ms_median": 12.173,
+   "gap_pct": 0.0
+  },
+  {
+   "n": 8,
+   "algo": "astar",
+   "queries": 4,
+   "solved": 1.0,
+   "capped": 0.0,
+   "exp_mean": 138.25,
+   "exp_median": 88.5,
+   "ms_median": 0.608,
+   "gap_pct": 0.0
+  },
+  {
+   "n": 8,
+   "algo": "greedy",
+   "queries": 4,
+   "solved": 1.0,
+   "capped": 0.0,
+   "exp_mean": 7.0,
+   "exp_median": 7.0,
+   "ms_median": 0.035,
+   "gap_pct": 6.816
+  },
+  {
+   "n": 8,
+   "algo": "ucs",
+   "queries": 4,
+   "solved": 1.0,
+   "capped": 0.0,
+   "exp_mean": 18081.5,
+   "exp_median": 16665.5,
+   "ms_median": 110.672,
+   "gap_pct": 0.0
+  }
+ ],
+ "exp2": [
+  {
+   "scenario": "all",
+   "n": 4,
+   "method": "ac3",
+   "instances": 4,
+   "nodes": 80.75,
+   "backtracks": 29.0,
+   "checks": 667.0,
+   "time_ms": 0.31,
+   "valid_patterns": 21.5,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "all",
+   "n": 4,
+   "method": "bt",
+   "instances": 4,
+   "nodes": 145.5,
+   "backtracks": 22.5,
+   "checks": 436.5,
+   "time_ms": 0.09,
+   "valid_patterns": 21.5,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "all",
+   "n": 4,
+   "method": "fc",
+   "instances": 4,
+   "nodes": 80.75,
+   "backtracks": 29.0,
+   "checks": 513.0,
+   "time_ms": 0.23,
+   "valid_patterns": 21.5,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "all",
+   "n": 5,
+   "method": "ac3",
+   "instances": 4,
+   "nodes": 841.25,
+   "backtracks": 44.75,
+   "checks": 6234.25,
+   "time_ms": 2.42,
+   "valid_patterns": 363.75,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "all",
+   "n": 5,
+   "method": "bt",
+   "instances": 4,
+   "nodes": 1159.75,
+   "backtracks": 176.5,
+   "checks": 3479.25,
+   "time_ms": 0.66,
+   "valid_patterns": 363.75,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "all",
+   "n": 5,
+   "method": "fc",
+   "instances": 4,
+   "nodes": 841.25,
+   "backtracks": 44.75,
+   "checks": 4898.25,
+   "time_ms": 2.09,
+   "valid_patterns": 363.75,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "all",
+   "n": 6,
+   "method": "ac3",
+   "instances": 4,
+   "nodes": 5191.5,
+   "backtracks": 353.5,
+   "checks": 38723.0,
+   "time_ms": 15.56,
+   "valid_patterns": 2175.5,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "all",
+   "n": 6,
+   "method": "bt",
+   "instances": 4,
+   "nodes": 9007.75,
+   "backtracks": 2089.0,
+   "checks": 27023.25,
+   "time_ms": 5.03,
+   "valid_patterns": 2175.5,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "all",
+   "n": 6,
+   "method": "fc",
+   "instances": 4,
+   "nodes": 5191.5,
+   "backtracks": 353.5,
+   "checks": 30789.0,
+   "time_ms": 13.93,
+   "valid_patterns": 2175.5,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "first10",
+   "n": 4,
+   "method": "ac3",
+   "instances": 4,
+   "nodes": 37.75,
+   "backtracks": 13.0,
+   "checks": 351.0,
+   "time_ms": 0.13,
+   "valid_patterns": 10.0,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "first10",
+   "n": 4,
+   "method": "bt",
+   "instances": 4,
+   "nodes": 63.5,
+   "backtracks": 8.5,
+   "checks": 190.5,
+   "time_ms": 0.04,
+   "valid_patterns": 10.0,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "first10",
+   "n": 4,
+   "method": "fc",
+   "instances": 4,
+   "nodes": 37.75,
+   "backtracks": 13.0,
+   "checks": 249.5,
+   "time_ms": 0.11,
+   "valid_patterns": 10.0,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "first10",
+   "n": 5,
+   "method": "ac3",
+   "instances": 4,
+   "nodes": 33.0,
+   "backtracks": 7.75,
+   "checks": 366.5,
+   "time_ms": 0.12,
+   "valid_patterns": 10.0,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "first10",
+   "n": 5,
+   "method": "bt",
+   "instances": 4,
+   "nodes": 57.0,
+   "backtracks": 10.25,
+   "checks": 171.0,
+   "time_ms": 0.04,
+   "valid_patterns": 10.0,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "first10",
+   "n": 5,
+   "method": "fc",
+   "instances": 4,
+   "nodes": 33.0,
+   "backtracks": 7.75,
+   "checks": 241.25,
+   "time_ms": 0.1,
+   "valid_patterns": 10.0,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "first10",
+   "n": 6,
+   "method": "ac3",
+   "instances": 4,
+   "nodes": 33.5,
+   "backtracks": 7.5,
+   "checks": 427.0,
+   "time_ms": 0.14,
+   "valid_patterns": 10.0,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "first10",
+   "n": 6,
+   "method": "bt",
+   "instances": 4,
+   "nodes": 55.75,
+   "backtracks": 9.75,
+   "checks": 167.25,
+   "time_ms": 0.03,
+   "valid_patterns": 10.0,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "first10",
+   "n": 6,
+   "method": "fc",
+   "instances": 4,
+   "nodes": 33.5,
+   "backtracks": 7.5,
+   "checks": 277.25,
+   "time_ms": 0.12,
+   "valid_patterns": 10.0,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "first10",
+   "n": 7,
+   "method": "ac3",
+   "instances": 4,
+   "nodes": 44.5,
+   "backtracks": 15.0,
+   "checks": 581.5,
+   "time_ms": 0.19,
+   "valid_patterns": 10.0,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "first10",
+   "n": 7,
+   "method": "bt",
+   "instances": 4,
+   "nodes": 141.25,
+   "backtracks": 48.25,
+   "checks": 423.75,
+   "time_ms": 0.08,
+   "valid_patterns": 10.0,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "first10",
+   "n": 7,
+   "method": "fc",
+   "instances": 4,
+   "nodes": 44.5,
+   "backtracks": 15.0,
+   "checks": 396.5,
+   "time_ms": 0.18,
+   "valid_patterns": 10.0,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "first10",
+   "n": 8,
+   "method": "ac3",
+   "instances": 4,
+   "nodes": 38.25,
+   "backtracks": 8.75,
+   "checks": 603.0,
+   "time_ms": 0.19,
+   "valid_patterns": 10.0,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "first10",
+   "n": 8,
+   "method": "bt",
+   "instances": 4,
+   "nodes": 359.0,
+   "backtracks": 178.0,
+   "checks": 1077.0,
+   "time_ms": 0.17,
+   "valid_patterns": 10.0,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "first10",
+   "n": 8,
+   "method": "fc",
+   "instances": 4,
+   "nodes": 38.25,
+   "backtracks": 8.75,
+   "checks": 399.0,
+   "time_ms": 0.17,
+   "valid_patterns": 10.0,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "unsat",
+   "n": 4,
+   "method": "ac3",
+   "instances": 4,
+   "nodes": 1.0,
+   "backtracks": 1.0,
+   "checks": 57.5,
+   "time_ms": 0.01,
+   "valid_patterns": 0.0,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "unsat",
+   "n": 4,
+   "method": "bt",
+   "instances": 4,
+   "nodes": 118.75,
+   "backtracks": 71.0,
+   "checks": 356.25,
+   "time_ms": 0.06,
+   "valid_patterns": 0.0,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "unsat",
+   "n": 4,
+   "method": "fc",
+   "instances": 4,
+   "nodes": 1.0,
+   "backtracks": 1.0,
+   "checks": 13.5,
+   "time_ms": 0.01,
+   "valid_patterns": 0.0,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "unsat",
+   "n": 5,
+   "method": "ac3",
+   "instances": 4,
+   "nodes": 1.0,
+   "backtracks": 1.0,
+   "checks": 76.0,
+   "time_ms": 0.01,
+   "valid_patterns": 0.0,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "unsat",
+   "n": 5,
+   "method": "bt",
+   "instances": 4,
+   "nodes": 810.0,
+   "backtracks": 523.0,
+   "checks": 2430.0,
+   "time_ms": 0.35,
+   "valid_patterns": 0.0,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "unsat",
+   "n": 5,
+   "method": "fc",
+   "instances": 4,
+   "nodes": 1.0,
+   "backtracks": 1.0,
+   "checks": 13.0,
+   "time_ms": 0.01,
+   "valid_patterns": 0.0,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "unsat",
+   "n": 6,
+   "method": "ac3",
+   "instances": 4,
+   "nodes": 1.0,
+   "backtracks": 1.0,
+   "checks": 96.0,
+   "time_ms": 0.01,
+   "valid_patterns": 0.0,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "unsat",
+   "n": 6,
+   "method": "bt",
+   "instances": 4,
+   "nodes": 4154.0,
+   "backtracks": 3499.0,
+   "checks": 12462.0,
+   "time_ms": 1.52,
+   "valid_patterns": 0.0,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "unsat",
+   "n": 6,
+   "method": "fc",
+   "instances": 4,
+   "nodes": 1.0,
+   "backtracks": 1.0,
+   "checks": 15.0,
+   "time_ms": 0.01,
+   "valid_patterns": 0.0,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "unsat",
+   "n": 7,
+   "method": "ac3",
+   "instances": 4,
+   "nodes": 1.0,
+   "backtracks": 1.0,
+   "checks": 114.5,
+   "time_ms": 0.02,
+   "valid_patterns": 0.0,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "unsat",
+   "n": 7,
+   "method": "bt",
+   "instances": 4,
+   "nodes": 25119.75,
+   "backtracks": 21695.0,
+   "checks": 75359.25,
+   "time_ms": 9.03,
+   "valid_patterns": 0.0,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "unsat",
+   "n": 7,
+   "method": "fc",
+   "instances": 4,
+   "nodes": 1.0,
+   "backtracks": 1.0,
+   "checks": 15.5,
+   "time_ms": 0.01,
+   "valid_patterns": 0.0,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "unsat",
+   "n": 8,
+   "method": "ac3",
+   "instances": 4,
+   "nodes": 1.0,
+   "backtracks": 1.0,
+   "checks": 131.5,
+   "time_ms": 0.02,
+   "valid_patterns": 0.0,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "unsat",
+   "n": 8,
+   "method": "bt",
+   "instances": 4,
+   "nodes": 149041.75,
+   "backtracks": 126639.0,
+   "checks": 447125.25,
+   "time_ms": 53.91,
+   "valid_patterns": 0.0,
+   "truncated": 0.0
+  },
+  {
+   "scenario": "unsat",
+   "n": 8,
+   "method": "fc",
+   "instances": 4,
+   "nodes": 1.0,
+   "backtracks": 1.0,
+   "checks": 14.5,
+   "time_ms": 0.02,
+   "valid_patterns": 0.0,
+   "truncated": 0.0
+  }
+ ],
+ "exp2_mismatches": 0
+}
